@@ -103,7 +103,7 @@ Functions that need more than names (`content:`, `width:` and the like) match no
 
 ## Performance
 
-Measured on the author's everyday laptop (Intel Core i9-13900HX, 32 GB, Windows 11, two NTFS drives with 9,453,012
+Measured on an everyday laptop (Intel Core i9-13900HX, 32 GB, Windows 11, two NTFS drives with 9,453,012
 files and folders), with Bedrock run as a service the same way the app runs it.
 
 | | Bedrock |
