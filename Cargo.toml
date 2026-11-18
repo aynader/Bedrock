@@ -1,0 +1,62 @@
+[package]
+name = "bedrock-index"
+version = "1.0.0"
+description = "Every file name on a Windows PC in memory-mapped columns, kept current from the NTFS change journal, searched with a rich query syntax."
+edition = "2021"
+rust-version = "1.95"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/aynader/Bedrock"
+documentation = "https://docs.rs/bedrock-index"
+keywords = ["search", "index", "ntfs", "windows", "files"]
+categories = ["filesystem", "command-line-utilities"]
+
+[package.metadata.docs.rs]
+# Windows only: the docs are built for Windows.
+default-target = "x86_64-pc-windows-msvc"
+targets = ["x86_64-pc-windows-msvc"]
+
+[lib]
+# The package is bedrock-index (bedrock was taken on crates.io), and the library is still used as `bedrock`.
+name = "bedrock"
+
+[[bin]]
+name = "bedrock"
+path = "src/main.rs"
+
+[dependencies]
+aho-corasick = "1.1"
+memchr = "2.7"
+crossbeam-channel = "0.5"
+unicode-normalization = "0.1"
+rayon = "1.10"
+regex = "1.11"
+
+[dev-dependencies]
+proptest = "1.5"
+
+[dependencies.windows-sys]
+version = "0.59"
+features = [
+  "Win32_Foundation",
+  "Win32_Globalization",
+  "Win32_Security",
+  "Win32_Storage_FileSystem",
+  "Win32_System_IO",
+  "Win32_System_Ioctl",
+  "Win32_System_Memory",
+  "Win32_System_Registry",
+  "Win32_System_SystemInformation",
+  "Win32_System_Threading",
+  "Win32_System_Time",
+  "Win32_System_Com",
+  "Win32_UI_Shell",
+]
+
+# Clippy as CI runs it (warnings fail it), less these, which are this code's style rather than faults: loops over
+# several arrays by one index, lists of highlighted ranges that hold one, and long signatures and types kept whole.
+[lints.clippy]
+needless_range_loop = "allow"
+single_range_in_vec_init = "allow"
+too_many_arguments = "allow"
+type_complexity = "allow"
